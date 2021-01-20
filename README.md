@@ -1,3 +1,3 @@
 # QuizApplication
 
-Simple Quizwebap in Django
+Simple Quizwebapp in Django
