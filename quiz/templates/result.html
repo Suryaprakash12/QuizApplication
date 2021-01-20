@@ -1,0 +1,30 @@
+{% extends 'welcome.html' %}
+<html>
+    <head>
+      <style>
+          body{
+              width:80%;
+              margin: auto;
+          }
+      </style>
+
+    </head>
+    <body>
+        {% block content %}
+        <center>
+        <div class="card">
+            <div class="card-header">
+              Result!
+            </div>
+            <div class="card-body">
+              <h1 class="card-title">Score: {{score}}</h1>
+              <p class="card-text">Little drops make mighty oceans.Practice More:)</p>
+              
+            </div>
+            
+          </div>
+          </center>
+        
+        {% endblock %}
+    </body>
+</html>

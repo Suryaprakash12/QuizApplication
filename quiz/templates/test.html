@@ -1,0 +1,184 @@
+<!--
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+     {% for i in key %}
+    <h1>{{i.question}}</h1>
+    <form>
+        <div class="radio">
+            <label><input type="radio" id="option1" onclick="click()" value="{{i.option1}}">{{i.option1}}</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" id="option2" onclick="click()" value="{{i.option2}}">{{i.option2}}</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" id="option3" onclick="click()" value="{{i.option3}}">{{i.option3}}</label>
+        </div>
+    </form>
+
+    {% endfor %}
+    </div>
+
+    <script>
+        
+        function click()
+        {
+            var o1=document.getElementById('option1').value();
+
+
+            var o2=document.getElementById('option2').value();
+            var o3=document.getElementById('option3').value();
+            var o4=document.getElementById('option4').value();
+            console.log(o1);
+            console.log(o2);
+            console.log(o3);
+            console.log(o4);
+        }
+        
+    </script>
+</body>
+</html>
+-->
+
+
+
+
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  
+ 
+</head>
+<body>
+    <form name="quizapp" onsubmit = "return submitAnswers(answers = [{% for q in key %}'{{ q.sol }}',{% endfor %}])">
+    {% for i in key %}
+    <div class="col-lg-8 border border-success p-4 m-4 mx-auto">
+               
+                <h1>{{i.question}}</h1>
+                
+                    <div class="radio">
+                    <label><input type="radio" name="{{i.id}}" class="c{{i.id}}" id="option1" value="{{i.option1}}">{{i.option1}} </label> 
+                    </div>
+                    <div class="radio">
+                    <label > <input type="radio" name="{{i.id}}" class="c{{i.id}}"  id="option2" value="{{i.option2}}">{{i.option2}}</label>
+                  </div>
+                  <div class="radio">
+                    <label ><input type="radio" name="{{i.id}}" class="c{{i.id}}" id="option3" value="{{i.option3}}">{{i.option3}}</label>
+                  </div>
+                    <div class="radio">
+                    <label ><input type="radio" name="{{i.id}}" class="c{{i.id}}"  id="option4" value="{{i.option4}}" >{{i.option4}} </label>
+                </div>
+                <b class="sol{{i.id}}" id="ans" style="display: none;color:green">{{i.sol}}</b><br>
+              
+            
+ 
+                
+    </div>
+   
+    </form>
+
+   <!--- <input type="submit" class="btn btn-success" value="click" id="but" onclick="cli();">-->
+    {% csrf_token %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>  
+     <script>
+         /**
+         window.onload=initiall;
+         var savebutton;
+         function initiall()
+         {
+             savebutton=document.getElementById('but');
+             savebutton.onclick=saveans;
+
+
+         }**/
+         /**
+
+         function saveans()
+         {
+             
+        var ans=$("input:radio[name=name]:checked").value;
+        var req=new XMLHttpRequest();
+        var url='/saveans?ans='+ans;
+        req.open("GET",url,true)
+        req.send();
+
+         }**/
+
+
+         var score=0;
+         $(document).ready(function()
+         {
+            $(".c{{i.id}}").click(function()
+            {
+               
+            
+            
+                $(".sol{{i.id}}").show();
+            
+        
+
+            });
+         });
+         
+         
+        function cli()
+        {
+
+
+        document.getElementById("con").innerHTML = ""; 
+        var ele;
+        document.getElementById("score").innerHTML="";
+         ele = document.getElementsByTagName('input'); 
+          
+        for(i = 0; i < ele.length; i++) { 
+              
+            if(ele[i].type="radio") { 
+              
+                if(ele[i].checked) {
+                   
+        
+                    document.getElementById("con").innerHTML+="Your Answer"+" is "+ele[i].value+" Your score is "+score+"<br>"; 
+                           // ele="";
+                            console.log("yes ")}
+                 
+            } 
+        } 
+    
+
+           
+        }
+   
+   </script>
+
+    {% endfor %}
+
+    
+    <center>
+    <input type="submit" class="btn btn-success" value="click" id="but" onclick="cli();">
+    
+     
+    <b id="con">
+
+    </b>
+    <b id="score">
+
+    </b>
+    </center>
+   
+</body>
+
+</html>       
