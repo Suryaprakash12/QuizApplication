@@ -1,3 +1,3 @@
 # QuizApplication
 
-Simple Quizwebapp in Django
+Simple Quizwebapp in Django(in master branch)
